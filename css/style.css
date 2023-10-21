@@ -7,7 +7,7 @@ body {
   #movie-details {
     margin: 20px;
     padding: 10px;
-    border: 1px solid brown;
+    border: 1px solid red;
     border-radius: 5px;
     background-color: white;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
