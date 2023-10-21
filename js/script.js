@@ -203,15 +203,15 @@ function showFilmDetails(film) {
         <p>Tickets Sold: ${film.tickets_sold} / Capacity: ${film.capacity}</p>
         <p>Description: ${film.description}</p>
     `;
-}
-    
-//     if (film.tickets_sold >= film.capacity) {
-//         filmDetails.innerHTML += '<p class="sold-out">Sold Out</p>';
-//     }
 
-//     filmDetails.style.display = "block";
-//     filmList.style.display = "none";
-// }
+    
+    if (film.tickets_sold >= film.capacity) {
+        filmDetails.innerHTML += '<p class="sold-out">Sold Out</p>';
+    }
+
+    filmDetails.style.display = "block";
+    filmList.style.display = "none";
+}
 
 // // Function to buy a ticket
 // function buyTicket(film) {
