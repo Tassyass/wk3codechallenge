@@ -160,20 +160,20 @@ const films = [
 // // Function to populate the film list
 function populateFilmList() {
     films.forEach((film) => {
-//         const filmElement = document.createElement("div");
-//         filmElement.className = "film";
-//         filmElement.innerHTML = `
-//             <h3>${film.title}</h3>
-//             <img src="${film.poster}" alt="${film.title}">
-//             <p>Showtime: ${film.showtime}</p>
-//             <p>Description: ${film.description}</p>
-//             <p>Tickets Sold: ${film.tickets_sold} / Capacity: ${film.capacity}</p>
-//             <button id="${film.id}" class="view-details">View Details</button>
-//             <button id="${film.id}" class="buy-ticket">Buy Ticket</button>
-//         `;
-//         filmList?.appendChild(filmElement);
-//     });
-// }
+        const filmElement = document.createElement("div");
+        filmElement.className = "film";
+        filmElement.innerHTML = `
+            <h3>${film.title}</h3>
+            <img src="${film.poster}" alt="${film.title}">
+            <p>Showtime: ${film.showtime}</p>
+            <p>Description: ${film.description}</p>
+            <p>Tickets Sold: ${film.tickets_sold} / Capacity: ${film.capacity}</p>
+            <button id="${film.id}" class="view-details">View Details</button>
+            <button id="${film.id}" class="buy-ticket">Buy Ticket</button>
+        `;
+        filmList?.appendChild(filmElement);
+    });
+}
 
 // // Event listener for viewing film details
 // filmList?.addEventListener("click", (event) => {
