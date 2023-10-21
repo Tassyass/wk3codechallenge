@@ -3,7 +3,7 @@ const filmList = document.getElementById("film-list");
 const filmDetails = document.getElementById("film-details");
 
 //Sample film data
- films = [
+const films = [
     {
         "id": "1",
         "title": "The Giant Gila Monster",
@@ -157,8 +157,41 @@ const filmDetails = document.getElementById("film-details");
       }
     ];
 
-// // Function to populate the film list
-// ... (previous code)
+// Function to populate the film list
+function populateFilmList() {
+  films.forEach((film) => {
+      const filmElement = document.createElement("div");
+      filmElement.className = "film";
+      filmElement.innerHTML = `
+          <h3>${film.title}</h3>
+          <img src="${film.poster}" alt="${film.title}">
+          <p>Showtime: ${film.showtime}</p>
+          <p>Description: ${film.description}</p>
+          <p>Tickets Sold: ${film.tickets_sold} / Capacity: ${film.capacity}</p>
+          <button id="${film.id}" class="view-details">View Details</button>
+          <button id="${film.id}" class="buy-ticket">Buy Ticket</button>
+      `;
+      filmList?.appendChild(filmElement);
+  });
+}
+
+// Event listener for viewing film details
+filmList?.addEventListener("click", (event) => {
+  if (event.target.classList.contains("view-details")) {
+      const filmId = event.target.id;
+      const selectedFilm = films.find((film) => film.id === filmId);
+      showFilmDetails(selectedFilm);
+  }
+});
+
+// Event listener for buying a ticket
+filmList?.addEventListener("click", (event) => {
+  if (event.target.classList.contains("buy-ticket")) {
+      const filmId = event.target.id;
+      const selectedFilm = films.find((film) => film.id === filmId);
+      buyTicket(selectedFilm);
+  }
+});
 
 // Function to display film details
 function showFilmDetails(film) {
@@ -169,9 +202,8 @@ function showFilmDetails(film) {
       <p>Showtime: ${film.showtime}</p>
       <p>Tickets Sold: ${film.tickets_sold} / Capacity: ${film.capacity}</p>
       <p>Description: ${film.description}</p>
-      <p>Remaining Tickets: ${film.capacity - film.tickets_sold}</p>
   `;
-
+  
   if (film.tickets_sold >= film.capacity) {
       filmDetails.innerHTML += '<p class="sold-out">Sold Out</p>';
   }
@@ -186,14 +218,8 @@ function buyTicket(film) {
       film.tickets_sold++;
       showFilmDetails(film); // Update film details
   } else {
-      showFilmDetails(film); // Movie is sold out
+      filmDetails.innerHTML += '<p class="sold-out">Sold Out</p>';
   }
-}
-
-// Function to buy a ticket
-function buyTicket(film) {
-  film.tickets_sold++;
-  showFilmDetails(film); // Update film details
 }
 
 // Initialize the film list
