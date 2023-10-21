@@ -158,8 +158,8 @@ const films = [
     ];
 
 // // Function to populate the film list
-// function populateFilmList() {
-//     films.forEach((film) => {
+function populateFilmList() {
+    films.forEach((film) => {
 //         const filmElement = document.createElement("div");
 //         filmElement.className = "film";
 //         filmElement.innerHTML = `
