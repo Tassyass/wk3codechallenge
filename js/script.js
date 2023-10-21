@@ -194,15 +194,16 @@ filmList?.addEventListener("click", (event) => {
 });
 
 // // Function to display film details
-// function showFilmDetails(film) {
-//     filmDetails.innerHTML = `
-//         <h2>${film.title}</h2>
-//         <img src="${film.poster}" alt="${film.title}">
-//         <p>Runtime: ${film.runtime} minutes</p>
-//         <p>Showtime: ${film.showtime}</p>
-//         <p>Tickets Sold: ${film.tickets_sold} / Capacity: ${film.capacity}</p>
-//         <p>Description: ${film.description}</p>
-//     `;
+function showFilmDetails(film) {
+    filmDetails.innerHTML = `
+        <h2>${film.title}</h2>
+        <img src="${film.poster}" alt="${film.title}">
+        <p>Runtime: ${film.runtime} minutes</p>
+        <p>Showtime: ${film.showtime}</p>
+        <p>Tickets Sold: ${film.tickets_sold} / Capacity: ${film.capacity}</p>
+        <p>Description: ${film.description}</p>
+    `;
+}
     
 //     if (film.tickets_sold >= film.capacity) {
 //         filmDetails.innerHTML += '<p class="sold-out">Sold Out</p>';
