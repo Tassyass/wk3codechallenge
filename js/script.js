@@ -185,13 +185,13 @@ filmList?.addEventListener("click", (event) => {
 });
 
 // // Event listener for buying a ticket
-// filmList?.addEventListener("click", (event) => {
-//     if (event.target.classList.contains("buy-ticket")) {
-//         const filmId = event.target.id;
-//         const selectedFilm = films.find((film) => film.id === filmId);
-//         buyTicket(selectedFilm);
-//     }
-// });
+filmList?.addEventListener("click", (event) => {
+    if (event.target.classList.contains("buy-ticket")) {
+        const filmId = event.target.id;
+        const selectedFilm = films.find((film) => film.id === filmId);
+        buyTicket(selectedFilm);
+    }
+});
 
 // // Function to display film details
 // function showFilmDetails(film) {
