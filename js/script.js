@@ -214,14 +214,14 @@ function showFilmDetails(film) {
 }
 
 // // Function to buy a ticket
-// function buyTicket(film) {
-//     if (film.tickets_sold < film.capacity) {
-//         film.tickets_sold++;
-//         showFilmDetails(film); // Update film details
-//     } else {
-//         filmDetails.innerHTML += '<p class="sold-out">Sold Out</p>';
-//     }
-// }
+function buyTicket(film) {
+    if (film.tickets_sold < film.capacity) {
+        film.tickets_sold++;
+        showFilmDetails(film); // Update film details
+    } else {
+        filmDetails.innerHTML += '<p class="sold-out">Sold Out</p>';
+    }
+}
 
-// // Initialize the film list
-// populateFilmList();
+// Initialize the film list
+populateFilmList();
