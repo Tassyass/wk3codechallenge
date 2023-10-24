@@ -1,200 +1,83 @@
+// Making sure the DOM loads first before displaying the movies
+document.addEventListener('DOMContentLoaded', fetchMovieData)
 
-const filmList = document.getElementById("film-list");
-const filmDetails = document.getElementById("film-details");
+// Define the API endpoint for movie data
+const apiEndpoint = 'https://my-json-server.typicode.com/Tassyass/wk3codechallenge/films';
 
-//Sample film data
-const films = [
-    {
-        "id": "1",
-        "title": "The Giant Gila Monster",
-        "runtime": "108",
-        "capacity": 30,
-        "showtime": "04:00PM",
-        "tickets_sold": 27,
-        "description": "A giant lizard terrorizes a rural Texas community and a heroic teenager attempts to destroy the creature.",
-        "poster": "https://www.gstatic.com/tv/thumb/v22vodart/2157/p2157_v_v8_ab.jpg"
-    },
-    {
-        "id": "2",
-        "title": "Manos: The Hands Of Fate",
-        "runtime": "118",
-        "capacity": 50,
-        "showtime": "06:45PM",
-        "tickets_sold": 44,
-        "description": "A family gets lost on the road and stumbles upon a hidden, underground, devil-worshiping cult led by the fearsome Master and his servant Torgo.",
-        "poster": "https://www.gstatic.com/tv/thumb/v22vodart/47781/p47781_v_v8_ac.jpg"
-      },
-      {
-        "id": "3",
-        "title": "Time Chasers",
-        "runtime": "93",
-        "capacity": 50,
-        "showtime": "09:30PM",
-        "tickets_sold": 31,
-        "description": "An inventor comes up with a time machine, but must prevent its abuse at the hands of an evil C.E.O.",
-        "poster": "https://www.gstatic.com/tv/thumb/v22vodart/23342/p23342_v_v8_ab.jpg"
-      },
-      {
-        "id": "4",
-        "title": "The Touch Of Satan",
-        "runtime": "101",
-        "capacity": 40,
-        "showtime": "09:00PM",
-        "tickets_sold": 31,
-        "description": "A young man meets a farm girl who is actually a witch.",
-        "poster": "https://www.gstatic.com/tv/thumb/v22vodart/43468/p43468_v_v8_aa.jpg"
-      },
-      {
-        "id": "5",
-        "title": "Santa Claus Conquers The Martians",
-        "runtime": "96",
-        "capacity": 50,
-        "showtime": "03:30PM",
-        "tickets_sold": 45,
-        "description": "The Martians kidnap Santa Claus because there is nobody on Mars to give their children presents.",
-        "poster": "https://www.gstatic.com/tv/thumb/v22vodart/4232/p4232_v_v8_aa.jpg"
-      },
-      {
-        "id": "6",
-        "title": "Track Of The Moon Beast",
-        "runtime": "112",
-        "capacity": 30,
-        "showtime": "10:30PM",
-        "tickets_sold": 16,
-        "description": "A young man is transformed into a hideous 'moon beast' due to a meteor fragment lodged in his body.",
-        "poster": "https://www.gstatic.com/tv/thumb/v22vodart/39804/p39804_v_v8_ab.jpg"
-      },
-      {
-        "id": "7",
-        "title": "The Skydivers",
-        "runtime": "94",
-        "capacity": 30,
-        "showtime": "07:30PM",
-        "tickets_sold": 22,
-        "description": "A woman seeks revenge on her former lover, who owns a skydiving business.",
-        "poster": "https://www.gstatic.com/tv/thumb/v22vodart/40518/p40518_v_v8_aa.jpg"
-      },
-      {
-        "id": "8",
-        "title": "The Killer Shrews",
-        "runtime": "115",
-        "capacity": 40,
-        "showtime": "08:30PM",
-        "tickets_sold": 32,
-        "description": "On an isolated island, a small group of people are terrorized by giant voracious shrews in the midst of a hurricane.",
-        "poster": "https://www.gstatic.com/tv/thumb/v22vodart/1466/p1466_v_v8_ab.jpg"
-      },
-      {
-        "id": "9",
-        "title": "Project Moon Base",
-        "runtime": "99",
-        "capacity": 40,
-        "showtime": "07:30PM",
-        "tickets_sold": 22,
-        "description": "A saboteur posing as a scientist strives to destroy the world's first space station.",
-        "poster": "https://www.gstatic.com/tv/thumb/v22vodart/46755/p46755_v_v8_aa.jpg"
-      },
-      {
-        "id": "10",
-        "title": "The Giant Spider Invasion",
-        "runtime": "122",
-        "capacity": 50,
-        "showtime": "10:00PM",
-        "tickets_sold": 44,
-        "description": "Giant spiders from another dimension invade Wisconsin.",
-        "poster": "https://www.gstatic.com/tv/thumb/v22vodart/42171/p42171_v_v8_ab.jpg"
-      },
-      {
-        "id": "11",
-        "title": "Catalina Caper",
-        "runtime": "104",
-        "capacity": 30,
-        "showtime": "06:00PM",
-        "tickets_sold": 12,
-        "description": "A group of swingin' teens take time out from having fun in the sun to try to foil a group of crooks searching for a stolen scroll.",
-        "poster": "https://www.gstatic.com/tv/thumb/v22vodart/58122/p58122_v_v8_aa.jpg"
-      },
-      {
-        "id": "12",
-        "title": "Secret Agent Super Dragon",
-        "runtime": "104",
-        "capacity": 30,
-        "showtime": "07:00PM",
-        "tickets_sold": 20,
-        "description": "A series of murders in Michigan lead an American secret agent to Amsterdam, where he uncovers a plot to imperil the world with a potent new drug.",
-        "poster": "https://www.gstatic.com/tv/thumb/v22vodart/93417/p93417_v_v8_aa.jpg",
-        "showing_id": "12"
-      },
-      {
-        "id": "13",
-        "title": "Wild Rebels",
-        "runtime": "100",
-        "capacity": 40,
-        "showtime": "09:00PM",
-        "tickets_sold": 31,
-        "description": "A stock car driver goes undercover as the wheel man for a motorcycle gang.",
-        "poster": "https://www.gstatic.com/tv/thumb/v22vodart/45367/p45367_v_v8_aa.jpg"
-      },
-      {
-        "id": "14",
-        "title": "Danger: Diabolik",
-        "runtime": "111",
-        "capacity": 50,
-        "showtime": "08:00PM",
-        "tickets_sold": 40,
-        "description": "International man of mystery Diabolik and his lover pull off heist after heist, all while European cops led by Inspector Ginko and envious mobsters led by Ralph Valmont are closing in on them.",
-        "poster": "https://www.gstatic.com/tv/thumb/v22vodart/11850/p11850_v_v8_aa.jpg"
-      },
-      {
-        "id": "15",
-        "title": "Village Of The Giants",
-        "runtime": "98",
-        "capacity": 50,
-        "showtime": "04:45PM",
-        "tickets_sold": 33,
-        "description": "Delinquent teen-agers ingest a substance and grow thirty feet tall, then proceed to take over a small town.",
-        "poster": "https://www.gstatic.com/tv/thumb/v22vodart/37991/p37991_v_v8_aa.jpg"
-      }
-    ];
-
-// // Function to populate the film list
-// ... (previous code)
-
-// Function to display film details
-function showFilmDetails(film) {
-  filmDetails.innerHTML = `
-      <h2>${film.title}</h2>
-      <img src="${film.poster}" alt="${film.title}">
-      <p>Runtime: ${film.runtime} minutes</p>
-      <p>Showtime: ${film.showtime}</p>
-      <p>Tickets Sold: ${film.tickets_sold} / Capacity: ${film.capacity}</p>
-      <p>Description: ${film.description}</p>
-      <p>Remaining Tickets: ${film.capacity - film.tickets_sold}</p>
-  `;
-
-  if (film.tickets_sold >= film.capacity) {
-      filmDetails.innerHTML += '<p class="sold-out">Sold Out</p>';
-  }
-
-  filmDetails.style.display = "block";
-  filmList.style.display = "none";
+// Function to fetch movie data
+async function fetchMovieData() {
+    try {
+        const response = await fetch(apiEndpoint);
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Error fetching movie data:', error);
+        return [];
+    }
 }
 
-// Function to buy a ticket
-function buyTicket(film) {
-  if (film.tickets_sold < film.capacity) {
-      film.tickets_sold++;
-      showFilmDetails(film); // Update film details
-  } else {
-      showFilmDetails(film); // Movie is sold out
-  }
+// Function to display movie details and film list
+function displayMovieDetailsAndList(movieData) {
+    const filmsList = document.getElementById('films');
+    const movieDetails = document.getElementById('movie-details');
+
+    // Populate the film list
+    filmsList.innerHTML = ''
+    movieData.forEach((movie) => {
+        const filmItem = document.createElement('li');
+        filmItem.classList.add('film', 'item');
+        filmItem.textContent = movie.title;
+
+        // Add a click event listener to display movie details when clicked
+        filmItem.addEventListener('click', () => {
+            displayMovieDetails(movie);
+        })
+
+        filmsList.appendChild(filmItem);
+    });
+
+    // Display details of the first movie by default
+    if (movieData.length > 0) {
+        let rand = Math.floor(Math.random() * movieData.length)
+        displayMovieDetails(movieData[rand]);
+    }
 }
 
-// Function to buy a ticket
-function buyTicket(film) {
-  film.tickets_sold++;
-  showFilmDetails(film); // Update film details
+// Function to display movie details
+function displayMovieDetails(movie) {
+    const movieDetails = document.getElementById('movie-details');
+    movieDetails.innerHTML = `
+        <img src="${movie.poster}" alt="${movie.title}">
+        <h2>${movie.title}</h2>
+        <p>Runtime: ${movie.runtime} mins</p>
+        <p>Showtime: ${movie.showtime}</p>
+        <p>Available Tickets: ${movie.capacity - movie.tickets_sold}</p>
+        <button id="buy-ticket">Buy Ticket</button>
+    `
+
+    // Add a click event listener for the "Buy Ticket" button
+    const buyTicketButton = document.getElementById('buy-ticket');
+    buyTicketButton.addEventListener('click', () => {
+        if (movie.capacity > movie.tickets_sold) {
+            movie.tickets_sold++;
+            alert('You bought a ticket')
+            displayMovieDetails(movie);
+        } else {
+           let btn =  document.querySelector("#buy-ticket");
+           btn.textContent = 'Sold Out';
+           alert('Sorry, This Movie is Sold Out')
+
+        }
+    })
 }
 
-// Initialize the film list
-populateFilmList();
+// trying to use the load event listener it did take a while to navigate through it but it did work
+window.addEventListener('load', async () => {
+    const movieData = await fetchMovieData();
+
+    if (movieData.length > 0) {
+        displayMovieDetailsAndList(movieData);
+    } else {
+        alert('Error loading movie data. Please try again later.');
+    }
+})
